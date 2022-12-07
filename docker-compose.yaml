@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+    blog_db:
+        container_name: blog_db
+        image: mysql
+        restart: always
+        ports:
+        - "3306"
+        environment:
+            MYSQL_DATABASE: blogx
+            MYSQL_ROOT_PASSWORD: blogx
+            MYSQL_USER: blogx
+            MYSQL_PASSWORD: blogx
+    blog_app:
+        container_name: blog_app
+        build:
+          context: .
+          dockerfile: Dockerfile
+        ports:
+        - 9000:9000
+        
