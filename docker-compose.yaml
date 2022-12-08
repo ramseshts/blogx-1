@@ -16,4 +16,6 @@ services:
         image: rafly21/laravel:05fa70b
         ports:
         - 9000:9000
+        depends_on: 
+        - blog_db
         
