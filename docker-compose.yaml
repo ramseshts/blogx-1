@@ -13,9 +13,8 @@ services:
             MYSQL_PASSWORD: blogx
     blog_app:
         container_name: blog_app
-        image: rafly21/laravel:05fa70b
+        image: rafly21/laravel:f144c45
         ports:
         - 9000:9000
-        depends_on: 
-        - blog_db
+      
         

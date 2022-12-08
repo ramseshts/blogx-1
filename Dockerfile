@@ -12,7 +12,9 @@ RUN curl -sS https://getcomposer.org/installer​ | php -- \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
+ENV LARAVEL .env
 COPY . /app
+COPY ${LARAVEL} /app
 RUN composer install --prefer-dist
 
 CMD php artisan serve --host=0.0.0.0 --port=9000 
