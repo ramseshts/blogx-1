@@ -25,7 +25,7 @@ pipeline {
      steps {
         sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)
 
-        echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" > .env
+        echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)"
 
         docker-compose up -d''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '.env,docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
