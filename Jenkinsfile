@@ -14,6 +14,7 @@ pipeline {
 
    stage('Build laravel') {
      steps {
+         sh 'export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)'
          sh 'docker build -t rafly21/laravel:$GIT_COMMIT_SHORT .'
          sh 'docker tag rafly21/laravel:$GIT_COMMIT_SHORT rafly21/laravel:$GIT_COMMIT_SHORT'
          sh 'docker push rafly21/laravel:$GIT_COMMIT_SHORT'
@@ -23,7 +24,11 @@ pipeline {
 
    stage('Deploy to remote server') {
      steps {
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''docker-compose up -d''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)
+
+        echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" >> .env
+
+        docker-compose up -d''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
      }
    }
