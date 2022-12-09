@@ -13,7 +13,7 @@ services:
             MYSQL_PASSWORD: blogx
     blog_app:
         container_name: blog_app
-        image: rafly21/laravel:${GIT_COMMIT_SHORT}
+        image: rafly21/laravel:a88e3a7
         ports:
         - 9000:9000
       
