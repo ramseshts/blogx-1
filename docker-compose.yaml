@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 services:
     blog_db:
         container_name: blog_db
@@ -13,7 +13,7 @@ services:
             MYSQL_PASSWORD: blogx
     blog_app:
         container_name: blog_app
-        image: rafly21/laravel:cbdb0d5
+        image: rafly21/laravel:${GIT_COMMIT_SHORT}
         ports:
         - 9000:9000
       
