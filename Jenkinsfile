@@ -2,13 +2,15 @@ pipeline {
  agent any
 
  environment {
-   GIT_COMMIT_SHORT = sh(returnStdout: true, script: '''echo $GIT_COMMIT | head -c 7''')
+  //  def GIT_COMMIT_SHORT = sh(returnStdout: true, script: '''echo $GIT_COMMIT | head -c 7''')
+   def GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'git log -1 --pretty=format:"%h"').trim()
  }
 
  stages {
    stage('Prepare .env') {
      steps {
        sh 'echo GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT) > .env'
+       sh 'cat .env'
      }
    }
 
