@@ -27,6 +27,8 @@ pipeline {
 
         echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" >> .env
 
+        sed -i 's/image = rafly21/laravel:cbdb0d5/image = rafly21/laravel:${GIT_COMMIT_SHORT}/g' docker-compose.yaml 
+
         docker-compose up -d''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '.env,docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
      }
