@@ -10,7 +10,6 @@ pipeline {
    stage('Prepare .env') {
      steps {
        sh 'echo GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT) > .env.compose'
-       sh 'cat .env'
      }
    }
 
