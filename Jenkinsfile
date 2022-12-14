@@ -32,9 +32,9 @@ pipeline {
 
         docker-compose up -d
 
-        docker exec -it blog_app php artisan key:generate
+        docker exec -it rafly21/laravel:${GIT_COMMIT_SHORT} php artisan key:generate
 
-        docker exec -it blog_app php artisan migrate''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '.env.compose,docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+        docker exec -it rafly21/laravel:${GIT_COMMIT_SHORT} php artisan migrate''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '.env.compose,docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
      }
    }
