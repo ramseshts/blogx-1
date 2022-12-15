@@ -30,7 +30,7 @@ pipeline {
 
         sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''mv .env.compose .env
 
-        docker-compose up -d --force-recreate --build 
+        docker-compose up -d 
 
         docker exec blog_app php artisan migrate''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '.env.compose,docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
