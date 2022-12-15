@@ -30,11 +30,9 @@ pipeline {
 
         sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''mv .env.compose .env
 
-        docker-compose up -d
+        docker-compose up -d --force-recreate --build 
 
-        docker exec -it rafly21/laravel:${GIT_COMMIT_SHORT} php artisan key:generate
-
-        docker exec -it rafly21/laravel:${GIT_COMMIT_SHORT} php artisan migrate''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '.env.compose,docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+        docker-compose exec -T blog_app php artisan migrate:fresh --seed --force''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '.env.compose,docker-compose.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
      }
    }
